@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import AlbumDetails from '../views/AlbumDetails.vue'
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../../node_modules/mdbootstrap/css/bootstrap.css';
@@ -31,7 +32,12 @@ const routes = [
   {
     path: '/upload',
     name: 'upload',
-    component: () => import('../components/Upload.vue')
+    component: () => import('../views/UploadView.vue')
+  },
+  {
+    path: '/album/:id/photos',
+    name: 'album_details',
+    component: AlbumDetails
   }
 ]
 

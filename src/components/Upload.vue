@@ -1,19 +1,7 @@
 <template>
-  <div>
-    <h2>Upload Images</h2>
+  <div v-if="selectedAlbumId>=0">
     <div class="form-group">
-      <label for="selectAlbum">Album Name</label>
-      <select id="selectAlbum" v-model="selectedAlbumIndex" class="browser-default custom-select">
-        <option
-          v-for="(album, index) in albumList"
-          v-bind:value="index"
-          v-bind:key="album.albumId"
-        >{{album.name}} ({{album.albumId}})</option>
-      </select>
-    </div>
-
-    <div v-if="selectedAlbumIndex>=0" class="form-group">
-      <label for="selectPhotos">Choose Photos</label>
+      <label for="selectPhotos">Add Images</label>
       <input
         id="selectPhotos"
         type="file"
@@ -65,27 +53,15 @@ import ApiService from "../services/ApiService";
 export default {
   name: "Upload",
   props: {
-    initialAlbumId: String,
-    albumLock: Boolean
+    selectedAlbumId: Number
   },
   data: () => {
     return {
-      selectedAlbumIndex: -1,
-      albumList: [],
       displayImageIndex: 0,
       images: []
     };
   },
-  created: function() {
-    let albumsPromise = ApiService.getAllAlbums();
-    albumsPromise.then(data => {
-      this.albumList = data;
-      let initalAlbumIndex = data.findIndex(
-        album => album.albumId == this.initialAlbumId
-      );
-      this.selectedAlbumIndex = initalAlbumIndex;
-    });
-  },
+  created: {},
   methods: {
     onFileChange: function(e) {
       let files = e.target.files || e.dataTransfer.files;
@@ -95,16 +71,16 @@ export default {
       console.log("", files);
     },
     nextPreview: function() {
-      let newIndex = (this.displayImageIndex += 1);
+      let newIndex = this.displayImageIndex + 1;
       if (newIndex >= this.images.length) {
         newIndex = 0;
       }
       this.displayImageIndex = newIndex;
     },
     prevPreview: function() {
-      let newIndex = (this.displayImageIndex -= 1);
+      let newIndex = this.displayImageIndex - 1;
       if (newIndex < 0) {
-        newIndex = this.images.length;
+        newIndex = this.images.length - 1;
       }
       this.displayImageIndex = newIndex;
     },
@@ -119,6 +95,11 @@ export default {
         imagePromises.push(imagePromise);
       }
       console.log(e);
+
+      Promise.all(imagePromises).then(() => {
+        this.$router.push("/album/" + this.selectedAlbumId + "/photos");
+        this.$router.go(this.$router.currentRoute);
+      });
     }
   },
   computed: {

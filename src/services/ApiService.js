@@ -6,6 +6,9 @@ class ApiService {
 
     constructor() { }
 
+    getPhotoUrl(photoId) {
+        return BASE_URL + "/photo/" + photoId;
+    }
 
     createAlbum(albumName) {
         return $.ajax({

@@ -1,14 +1,8 @@
 <template>
-  <div>
-        <h2>My Photos</h2>
-        <p>Album #{{this.albumId}}</p>
-        <div class="row">
-    <div class="col-xs-6 col-md-4 col-lg-3" v-for="photoId in photos" v-bind:key="photoId">
-      <button class="btn w-100">
-        <p>ID: #{{photoId}}</p>
-      </button>
+  <div class="row">
+    <div class="col-xs-6 col-md-4 col-lg-3 mb-2" v-for="photoId in photos" v-bind:key="photoId">
+      <img v-bind:src="generatePhotoUrl(photoId)" class="img-fluid img-thumbnail" alt="loading photo" />
     </div>
-        </div>
   </div>
 </template>
 
@@ -17,21 +11,23 @@ import ApiService from "../services/ApiService";
 
 export default {
   name: "Photos",
-  props: {
-    albumId: String
-  },
+  props: { albumId: Number },
   data: () => {
     return {
       photos: []
     };
   },
   created: function() {
-    let photosPromise = ApiService.getPhotos("1");
+    let photosPromise = ApiService.getPhotos(this.albumId);
     photosPromise.done(data => {
       this.photos = data;
     });
   },
-  methods: {},
+  methods: {
+    generatePhotoUrl: function(photoId) {
+      return ApiService.getPhotoUrl(photoId);
+    }
+  },
   computed: {}
 };
 </script>
