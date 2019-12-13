@@ -1,15 +1,59 @@
 <template>
   <div>
-    <input type="file" multiple v-on:change="onFileChange" />
+    <h2>Upload Images</h2>
+    <div class="form-group">
+      <label for="selectAlbum">Album Name</label>
+      <select id="selectAlbum" v-model="selectedAlbumIndex" class="browser-default custom-select">
+        <option
+          v-for="(album, index) in albumList"
+          v-bind:value="index"
+          v-bind:key="album.albumId"
+        >{{album.name}} ({{album.albumId}})</option>
+      </select>
+    </div>
 
-    <button v-on:click="uploadPhotosToAlbum" class="btn btn-info">Upload</button>
-
-    <div class="card">
-      <div class="row d-flex justify-content-center">
-        <h6 class="mt-2">Preview</h6>
+    <div v-if="selectedAlbumIndex>=0" class="form-group">
+      <label for="selectPhotos">Choose Photos</label>
+      <input
+        id="selectPhotos"
+        type="file"
+        multiple
+        v-on:change="onFileChange"
+        class="btn w-100 d-flex justify-content-center text-center"
+      />
+      <div class="ml-4 mr-4">
+        <small>{{generateFilenames}}</small>
       </div>
-      <div class="row d-flex justify-content-center pl-4 pr-4 pb-2">
-        <img v-bind:src="displayImage" class="img-fluid img-thumbnail" />
+    </div>
+
+    <div v-if="images.length>0" class="text-center">
+      <button v-on:click="uploadPhotosToAlbum" class="btn btn-info mb-3">
+        Upload Photo(s)
+        <i class="fas fa-cloud-upload-alt fa-lg pl-2"></i>
+      </button>
+      <div class="card text-center">
+        <nav aria-label="Page navigation">
+          <ul class="pagination pg-blue d-flex justify-content-center text-center pt-2 m-0">
+            <li class="page-item">
+              <a class="page-link" v-on:click="prevPreview">
+                <i class="fas fa-caret-left"></i>
+              </a>
+            </li>
+            <li class="page-item pt-1 pl-1 pr-1">{{generateThumbnailIndex}}</li>
+
+            <li class="page-item">
+              <a class="page-link" v-on:click="nextPreview">
+                <i class="fas fa-caret-right"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <p>{{generateThumbnailName}}</p>
+
+        <div class="row d-flex justify-content-center pl-4 pr-4 pb-2">
+          <img v-bind:src="generateThumbnail" class="img-fluid img-thumbnail" />
+        </div>
       </div>
     </div>
   </div>
@@ -20,32 +64,88 @@ import ApiService from "../services/ApiService";
 
 export default {
   name: "Upload",
+  props: {
+    initialAlbumId: String,
+    albumLock: Boolean
+  },
   data: () => {
     return {
-      displayImage: "",
+      selectedAlbumIndex: -1,
+      albumList: [],
+      displayImageIndex: 0,
       images: []
     };
   },
-  created: {},
+  created: function() {
+    let albumsPromise = ApiService.getAllAlbums();
+    albumsPromise.then(data => {
+      this.albumList = data;
+      let initalAlbumIndex = data.findIndex(
+        album => album.albumId == this.initialAlbumId
+      );
+      this.selectedAlbumIndex = initalAlbumIndex;
+    });
+  },
   methods: {
     onFileChange: function(e) {
       let files = e.target.files || e.dataTransfer.files;
       if (!files.length) return;
-      this.displayImage = URL.createObjectURL(files[0]);
       this.images = files;
+      this.displayImageIndex = 0;
       console.log("", files);
+    },
+    nextPreview: function() {
+      let newIndex = (this.displayImageIndex += 1);
+      if (newIndex >= this.images.length) {
+        newIndex = 0;
+      }
+      this.displayImageIndex = newIndex;
+    },
+    prevPreview: function() {
+      let newIndex = (this.displayImageIndex -= 1);
+      if (newIndex < 0) {
+        newIndex = this.images.length;
+      }
+      this.displayImageIndex = newIndex;
     },
     uploadPhotosToAlbum: function(e) {
       let imagePromises = [];
       for (let i = 0; i < this.images.length; i++) {
         let imageFile = this.images[i];
-        let imagePromise = ApiService.uploadPhoto(1, imageFile); //
+        let imagePromise = ApiService.uploadPhoto(
+          this.selectedAlbumId,
+          imageFile
+        ); //
         imagePromises.push(imagePromise);
       }
-      console.log("mmmk", e);
+      console.log(e);
     }
   },
-  computed: {}
+  computed: {
+    generateThumbnail: function() {
+      return URL.createObjectURL(this.images[this.displayImageIndex]);
+    },
+    generateThumbnailName: function() {
+      return this.images[this.displayImageIndex].name;
+    },
+    generateThumbnailIndex: function() {
+      return this.displayImageIndex + 1 + " of " + this.images.length;
+    },
+    generateFilenames: function() {
+      if (!this.images || this.images.length <= 0) {
+        return "";
+      } else if (this.images.length == 1) {
+        return this.images[0].name;
+      }
+
+      let imageNames = "";
+      let i = 0;
+      for (i = 0; i < this.images.length - 1; i++) {
+        imageNames += this.images[i].name + ", ";
+      }
+      return imageNames + "and " + this.images[i].name + ".";
+    }
+  }
 };
 </script>
 
