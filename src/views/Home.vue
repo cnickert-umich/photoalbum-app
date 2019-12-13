@@ -1,18 +1,9 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <Albums/>
+    Hello, this is the home page.
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Albums from '@/components/Albums.vue'
 
-export default {
-  name: 'home',
-  components: {
-    Albums
-  }
-}
 </script>
