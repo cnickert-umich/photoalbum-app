@@ -22,7 +22,7 @@
 
             <div class="col-md-6 col-xl-5 mb-4">
               <img
-                src="https://images.pexels.com/photos/325045/pexels-photo-325045.jpeg"
+                src="https://u-of-m-album.herokuapp.com/photo/27"
                 alt
                 class="img-fluid img-thumbnail"
               />
