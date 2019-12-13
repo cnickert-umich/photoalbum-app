@@ -54,8 +54,22 @@ class ApiService {
         });
     }
 
-    uploadPhoto() {
-
+    uploadPhoto(albumId, imageFile) {
+        let form_data = new FormData();
+        form_data.append("file", imageFile);
+        return $.ajax({
+            url: BASE_URL + "/album/" + albumId + "/photo",
+            headers: {
+                'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidmVzZWwiLCJleHAiOjE1NzcwNTg3Njd9.-ZjQuiF3nzGIrnS2Nr_f5MbE-6BF_7YUwrUHKPDYQ8OxvkTGYJUd8u83xtZj2E113VWAxR7l_8rpxbZNTCx38A",
+                "Accept": "application/json"
+            },
+            cache: false,
+            contentType: false,
+            processData: false,
+            async: false,
+            method: 'POST',
+            data: form_data
+        });
     }
 
 

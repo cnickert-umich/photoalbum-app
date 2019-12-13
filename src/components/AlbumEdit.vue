@@ -10,7 +10,7 @@
         v-model="albumName"
       />
     </div>
-    <button class="btn btn-success" v-on:click="createAlbum">
+    <button class="btn btn-success" v-bind:class="{ disabled: albumName.length <= 0 }" v-on:click="createAlbum">
       Save {{albumName}} Album
       <i class="fas fa-save pl-2 fa-lg"></i>
     </button>
@@ -24,7 +24,7 @@ export default {
   name: "AlbumEdit",
   data: () => {
     return {
-      albumName: "farts"
+      albumName: ""
     };
   },
   created: {},

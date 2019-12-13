@@ -27,6 +27,11 @@ const routes = [
     path: '/albums/new',
     name: 'albums_new',
     component: () => import('../components/AlbumEdit.vue')
+  },
+  {
+    path: '/upload',
+    name: 'upload',
+    component: () => import('../components/Upload.vue')
   }
 ]
 
