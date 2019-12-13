@@ -1,5 +1,5 @@
 <template>
-  <div class="album_details">
+  <div class="album_details container pt-4">
     <div v-if="selectedAlbumId>-1">
       <Photos v-bind:albumId="selectedAlbumId" />
       <Upload v-bind:selectedAlbumId="selectedAlbumId" />

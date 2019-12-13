@@ -1,5 +1,5 @@
 <template>
-  <div class="albums_all">
+  <div class="albums_all container pt-4">
     <div class="row text-center">
       <div class="col">
         <h2>My Albums</h2>

@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <Navigation></Navigation>
-    <div class="container pt-4">
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
@@ -20,4 +18,9 @@ export default {
 </script>
 
 <style>
+html,
+body,
+#app {
+  height: 100%;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="upload_no_album">
+  <div class="upload_view container pt-4">
     <h2>Upload Images</h2>
     <div class="form-group">
       <label for="selectAlbum">Album Name</label>
@@ -21,7 +21,7 @@ import Upload from "@/components/Upload.vue";
 import ApiService from "../services/ApiService";
 
 export default {
-  name: "upload_view",
+  name: "upload_no_album",
   components: {
     Upload
   },

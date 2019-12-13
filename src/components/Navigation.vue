@@ -2,13 +2,13 @@
   <!--Navbar-->
   <nav
     id="nav"
-    class="navbar navbar-expand-lg navbar-dark primary-color sticky-top scrolling-navbar"
+    class="navbar navbar-expand-lg navbar-dark info-color sticky-top scrolling-navbar"
   >
     <div class="container">
       <!-- Navbar brand -->
 
       <router-link to="/" class="navbar-brand text-center mr-5 nav-item">
-        <span>Phortal</span>
+        <span>Photortal</span>
         <i class="fas fa-camera-retro fa-lg pl-2"></i>
       </router-link>
 
@@ -38,7 +38,7 @@
         <!-- Dropdown -->
         <div class="nav-item dropdown mr-2 ml-2">
           <button
-            class="btn btn-light dropdown-toggle btn-block"
+            class="btn btn-outline-light dropdown-toggle btn-block"
             id="navbarDropdownMenuLink"
             data-toggle="dropdown"
             aria-haspopup="true"
@@ -48,7 +48,7 @@
             <i class="fas fa-hammer pl-2"></i>
           </button>
 
-          <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+          <div class="dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink">
             <h6 class="dropdown-header">Album</h6>
             <router-link to="/albums" class="dropdown-item">
               <i class="fas fa-folder-open pr-2"></i>View All
@@ -64,26 +64,27 @@
           </div>
         </div>
 
-        <div class="mr-2 ml-2">
+        <!-- Dropdown -->
+        <div class="nav-item dropdown mr-2 ml-2">
           <button
-            class="btn btn-primary dropdown-toggle btn-block"
-            href="#"
-            role="button"
-            id="dropdownMenuLink"
+            class="btn btn-info dropdown-toggle btn-block"
+            id="navbarDropdownMenuLink"
             data-toggle="dropdown"
             aria-haspopup="true"
             aria-expanded="false"
           >
-            ACCOUNT
+            CNICKERT
             <i class="fas fa-user pl-2"></i>
           </button>
 
-          <div class="dropdown-menu w-100">
-            <Login></Login>
+          <div class="dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink">
+            <h6 class="dropdown-header">Account</h6>
+            <router-link to="/login" class="dropdown-item">
+              <i class="fas fa-sign-out-alt pr-2"></i>Logout
+            </router-link>
           </div>
         </div>
       </div>
-
       <!-- Collapsible content -->
     </div>
   </nav>
@@ -91,13 +92,9 @@
 </template>
 
 <script>
-import Login from "@/components/Login.vue";
-
 export default {
   name: "navigation",
-  components: {
-    Login
-  }
+  components: {}
 };
 </script>
 

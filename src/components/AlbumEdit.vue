@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="albums_edit container pt-4">
     <div class="form-group">
       <label for="albumNameEdit">Album Name</label>
       <input
