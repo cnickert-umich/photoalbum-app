@@ -4,11 +4,11 @@
     <div
       class="w-100 fixed-bottom d-flex justify-content-end justify-content-md-center d-block d-md-none"
     >
-      <button class="btn btn-primary rounded-circle p-3 m-4" style="height:60px; width: 60px;">
+      <button class="btn btn-primary rounded-circle p-3 m-4  waves-effect" style="height:60px; width: 60px;">
         <i class="fas fa-plus fa-lg"></i>
       </button>
     </div>
-    <button class="btn btn-primary d-none d-md-block">
+    <button class="btn btn-primary d-none d-md-block  waves-effect">
       New
       <i class="fas fa-plus ml-2"></i>
     </button>

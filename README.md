@@ -1,4 +1,4 @@
-# photoalbum-app
+# test-project-routes
 
 ## Project setup
 ```

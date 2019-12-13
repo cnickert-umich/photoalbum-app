@@ -21,7 +21,7 @@ class ApiService {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidmVzZWwiLCJleHAiOjE1NzY5OTQwMDV9.cR9Yfep4iWdrMRHzY6HWbc3F7Iz9L9BjzGwVaAI2sClS5PAgoN2BT_LuAuukDYDalL1G_Rk5UP2BrY3WK_STOw"
+                'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidmVzZWwiLCJleHAiOjE1NzcwNTg3Njd9.-ZjQuiF3nzGIrnS2Nr_f5MbE-6BF_7YUwrUHKPDYQ8OxvkTGYJUd8u83xtZj2E113VWAxR7l_8rpxbZNTCx38A"
             },
             dataType: 'json',
             method: 'GET'
@@ -35,7 +35,7 @@ class ApiService {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidmVzZWwiLCJleHAiOjE1NzY5OTQwMDV9.cR9Yfep4iWdrMRHzY6HWbc3F7Iz9L9BjzGwVaAI2sClS5PAgoN2BT_LuAuukDYDalL1G_Rk5UP2BrY3WK_STOw"
+                'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidmVzZWwiLCJleHAiOjE1NzcwNTg3Njd9.-ZjQuiF3nzGIrnS2Nr_f5MbE-6BF_7YUwrUHKPDYQ8OxvkTGYJUd8u83xtZj2E113VWAxR7l_8rpxbZNTCx38A"
             },
             dataType: 'json',
             method: 'GET'
