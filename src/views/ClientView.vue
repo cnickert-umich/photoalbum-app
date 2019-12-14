@@ -40,6 +40,27 @@
       </header>
       <!-- Main navigation -->
     </div>
+    <!-- Footer -->
+    <footer class="page-footer font-small unique-color-dark pt-4">
+      <!-- Footer Elements -->
+      <div class="container">
+        <!-- Call to action -->
+        <input class="form-control form-control-sm mb-4" :value="url" />
+        <!-- Call to action -->
+      </div>
+      <!-- Footer Elements -->
+
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">
+        <small>Powered By</small>
+        <router-link to="/manage" class="navbar-brand text-center">
+          <span class="pl-3">Photortal</span>
+          <i class="fas fa-camera-retro fa-lg pl-2"></i>
+        </router-link>
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
   </div>
 </template>
 
@@ -69,7 +90,11 @@ export default {
     }
   },
   methods: {},
-  computed: {}
+  computed: {
+    url: function() {
+      return decodeURI(window.location);
+    }
+  }
 };
 </script>
 

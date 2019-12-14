@@ -4,6 +4,11 @@
       <h4>{{albumName}}</h4>
       <Photos v-bind:albumId="selectedAlbumId" />
       <Upload v-bind:selectedAlbumId="selectedAlbumId" />
+
+      <div class="form-group mb-4">
+        <label for="albumUrl">Share</label>
+        <input id="albumUrl" class="form-control form-control-sm" :value="url" />
+      </div>
     </div>
   </div>
 </template>
@@ -23,14 +28,17 @@ export default {
   data: () => {
     return { selectedAlbumId: -1, albumName: "" };
   },
-  mounted() {
-    this.selectedAlbumId = parseInt(this.$route.params.id);
-  },
   created: function() {
-    let albumDetailsPromise = ApiService.getAlbumById(this.albumId);
+    this.selectedAlbumId = parseInt(this.$route.params.id);
+    let albumDetailsPromise = ApiService.getAlbumById(this.selectedAlbumId);
     albumDetailsPromise.then(data => {
       this.albumName = data.name;
     });
+  },
+  computed: {
+    url: function() {
+      return window.location.origin + "?id=" + btoa(btoa(btoa(btoa(btoa(this.selectedAlbumId)))));
+    }
   }
 };
 </script>
