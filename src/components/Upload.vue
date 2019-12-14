@@ -68,7 +68,6 @@ export default {
       if (!files.length) return;
       this.images = files;
       this.displayImageIndex = 0;
-      console.log("", files);
     },
     nextPreview: function() {
       let newIndex = this.displayImageIndex + 1;
@@ -84,7 +83,7 @@ export default {
       }
       this.displayImageIndex = newIndex;
     },
-    uploadPhotosToAlbum: function(e) {
+    uploadPhotosToAlbum: function() {
       let imagePromises = [];
       for (let i = 0; i < this.images.length; i++) {
         let imageFile = this.images[i];
@@ -94,7 +93,6 @@ export default {
         ); //
         imagePromises.push(imagePromise);
       }
-      console.log(e);
 
       Promise.all(imagePromises).then(() => {
         this.$router.push("/album/" + this.selectedAlbumId + "/photos");
