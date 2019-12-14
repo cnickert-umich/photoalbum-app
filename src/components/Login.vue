@@ -1,53 +1,103 @@
 <template>
-  <div class="w-100">
-    <div class="form-row pl-4 pr-4">
-      <div class="form-group col-lg-5">
-        <label for="exampleDropdownFormEmail1">Email address</label>
+  <div class="login text-center pt-4">
+    <!-- Default form login -->
+    <div class="row justify-content-center">
+      <form class="text-center border border-light p-5 col-md-6 col-lg-5" action="#!">
+        <p class="h4 mb-4">Account Login</p>
+
+        <div class="alert alert-success" v-if="showRegisterSuccess" role="alert">
+          <p class="mb-0">Success! Sign into your new account below.</p>
+        </div>
+        <div class="alert alert-danger" v-if="showErrorMessage" role="alert">
+          <p class="mb-0">
+            Your password did not match the provided username. Try checking your
+            <code>CAPSLOCK</code> key.
+          </p>
+        </div>
+
+        <!-- Email -->
         <input
-          type="email"
-          class="form-control"
-          id="exampleDropdownFormEmail1"
-          placeholder="email@example.com"
+          type="text"
+          id="loginUsername"
           v-model="username"
+          v-bind:class="{disabled: disableClick}"
+          class="form-control mb-4"
+          placeholder="Username"
         />
-        {{username}}
-      </div>
-      <div class="form-group col-lg-5">
-        <label for="exampleDropdownFormPassword1">Password</label>
+
+        <!-- Password -->
         <input
           type="password"
-          class="form-control"
-          id="exampleDropdownFormPassword1"
+          id="loginPassword"
+          v-model="password"
+          v-bind:class="{disabled: disableClick}"
+          class="form-control mb-4"
           placeholder="Password"
         />
-      </div>
-      <div class="form-group col-lg-2 d-flex align-items-end mb-2">
-        <button type="submit" class="btn btn-primary">Sign In</button>
-      </div>
+
+        <!-- Sign in button -->
+        <button
+          class="btn btn-info btn-block my-4"
+          v-bind:class="{disabled: disableClick}"
+          v-on:click="login"
+          type="button"
+        >Login</button>
+
+        <!-- Register -->
+        <p>
+          Not a member?
+          <router-link to="/signup">Register</router-link>
+        </p>
+      </form>
     </div>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Signup</a>
+    <!-- Default form login -->
   </div>
 </template>
 
 <script>
-import ApiService from "../services/ApiService";
+import LoginService from "../services/LoginService";
 
 export default {
-  name: "Login",
+  name: "login",
   data: () => {
     return {
       username: "",
-      password: ""
+      password: "",
+      disableClick: false,
+      showErrorMessage: false,
+      showRegisterSuccess: false
     };
   },
   created: function() {
-    let albumsPromise = ApiService.getAllAlbums();
-    albumsPromise.done(data => {
-      this.albums = data;
-    });
+    if (
+      this.$route.query &&
+      this.$route.query.success &&
+      this.$route.query.username
+    ) {
+      this.username = this.$route.query.username;
+      this.showRegisterSuccess = true;
+    }
   },
-  methods: {},
+  methods: {
+    login: function() {
+      this.disableClick = true;
+      this.showErrorMessage = false;
+      this.showRegisterSuccess = false;
+      let authPromise = LoginService.loginRequest(this.username, this.password);
+      authPromise
+        .then((data, textStatus, xhr) => {
+          let authToken = xhr.getResponseHeader("Authorization");
+
+          LoginService.stashAuthToken(authToken);
+
+          this.$router.push("/albums");
+        })
+        .catch(() => {
+          this.disableClick = false;
+          this.showErrorMessage = true;
+        });
+    }
+  },
   computed: {}
 };
 </script>

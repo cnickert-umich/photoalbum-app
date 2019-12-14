@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import AlbumDetails from '../views/AlbumDetails.vue'
+import Login from '../components/Login.vue'
+import Signup from '../components/Signup.vue'
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../../node_modules/mdbootstrap/css/bootstrap.css';
@@ -18,6 +20,16 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    component: Signup
   },
   {
     path: '/albums',

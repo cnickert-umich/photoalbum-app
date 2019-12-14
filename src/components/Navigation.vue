@@ -1,9 +1,6 @@
 <template>
   <!--Navbar-->
-  <nav
-    id="nav"
-    class="navbar navbar-expand-lg navbar-dark info-color sticky-top scrolling-navbar"
-  >
+  <nav id="nav" class="navbar navbar-expand-lg navbar-dark info-color sticky-top scrolling-navbar">
     <div class="container">
       <!-- Navbar brand -->
 
@@ -36,7 +33,7 @@
         <!-- Links -->
 
         <!-- Dropdown -->
-        <div class="nav-item dropdown mr-2 ml-2">
+        <div v-if="authenticated" class="nav-item dropdown mr-2 ml-2">
           <button
             class="btn btn-outline-light dropdown-toggle btn-block"
             id="navbarDropdownMenuLink"
@@ -65,7 +62,7 @@
         </div>
 
         <!-- Dropdown -->
-        <div class="nav-item dropdown mr-2 ml-2">
+        <div v-if="authenticated" class="nav-item dropdown mr-2 ml-2">
           <button
             class="btn btn-info dropdown-toggle btn-block"
             id="navbarDropdownMenuLink"
@@ -73,16 +70,24 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            CNICKERT
+            {{userename}}
             <i class="fas fa-user pl-2"></i>
           </button>
 
           <div class="dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink">
             <h6 class="dropdown-header">Account</h6>
-            <router-link to="/login" class="dropdown-item">
+            <a v-on:click="logout" class="dropdown-item">
               <i class="fas fa-sign-out-alt pr-2"></i>Logout
-            </router-link>
+            </a>
           </div>
+        </div>
+        <div v-else>
+          <router-link to="/signup">
+            <button type="button" class="btn btn-outline-light">Signup</button>
+          </router-link>
+          <router-link to="/login">
+            <button type="button" class="btn btn-info">Login</button>
+          </router-link>
         </div>
       </div>
       <!-- Collapsible content -->
@@ -92,9 +97,47 @@
 </template>
 
 <script>
+import LoginService from "../services/LoginService";
+
 export default {
   name: "navigation",
-  components: {}
+  data: () => {
+    return { authenticated: false, userename: "" };
+  },
+  components: {},
+  created: function() {
+    this.checkAuthentication();
+  },
+  watch: {
+    $route() {
+      this.checkAuthentication();
+    }
+  },
+  methods: {
+    logout: function() {
+      LoginService.stashAuthToken(null);
+      this.$router.push("/login");
+    },
+    checkAuthentication: function() {
+      let authToken = LoginService.getAuthToken();
+      if (authToken) {
+        let claims = LoginService.getAuthTokenClaims(authToken);
+
+        this.userename = claims.sub;
+        this.authenticated = true;
+        let path = this.$route.path;
+        if (path == "/login" || path == "/signup") {
+          this.$router.push("/");
+        }
+      } else {
+        this.authenticated = false;
+        let path = this.$route.path;
+        if (path != "/login" && path != "/signup" && path != "/") {
+          this.$router.push("/login");
+        }
+      }
+    }
+  }
 };
 </script>
 

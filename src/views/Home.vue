@@ -15,17 +15,17 @@
                 <strong>Mange your photos through our portal. Upload, store, and view from anywhere.</strong>
               </p>
 
-              <button type="button" class="btn btn-info">Signup</button>
-              <button type="button" class="btn btn-info">Login</button>
+              <router-link to="/signup">
+                <button type="button" class="btn btn-outline-light">Signup</button>
+              </router-link>
+              <router-link to="/login">
+                <button type="button" class="btn btn-info">Login</button>
+              </router-link>
               <p>Are you new? Signup for free!</p>
             </div>
 
             <div class="col-md-6 col-xl-5 mb-4">
-              <img
-                src="https://u-of-m-album.herokuapp.com/photo/27"
-                alt
-                class="img-fluid img-thumbnail"
-              />
+              <img src="../assets/display.jpg" alt class="img-fluid img-thumbnail" />
             </div>
           </div>
         </div>

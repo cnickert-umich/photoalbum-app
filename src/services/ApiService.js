@@ -1,4 +1,5 @@
 import $ from '../../node_modules/jquery/dist/jquery';
+import LoginSerivce from './LoginService';
 
 const BASE_URL = "https://u-of-m-album.herokuapp.com";
 
@@ -16,7 +17,7 @@ class ApiService {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidmVzZWwiLCJleHAiOjE1NzcwNTg3Njd9.-ZjQuiF3nzGIrnS2Nr_f5MbE-6BF_7YUwrUHKPDYQ8OxvkTGYJUd8u83xtZj2E113VWAxR7l_8rpxbZNTCx38A"
+                'Authorization': LoginSerivce.getAuthToken()
             },
             dataType: 'json',
             method: 'POST',
@@ -36,7 +37,7 @@ class ApiService {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidmVzZWwiLCJleHAiOjE1NzcwNTg3Njd9.-ZjQuiF3nzGIrnS2Nr_f5MbE-6BF_7YUwrUHKPDYQ8OxvkTGYJUd8u83xtZj2E113VWAxR7l_8rpxbZNTCx38A"
+                'Authorization': LoginSerivce.getAuthToken()
             },
             dataType: 'json',
             method: 'GET'
@@ -50,7 +51,7 @@ class ApiService {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidmVzZWwiLCJleHAiOjE1NzcwNTg3Njd9.-ZjQuiF3nzGIrnS2Nr_f5MbE-6BF_7YUwrUHKPDYQ8OxvkTGYJUd8u83xtZj2E113VWAxR7l_8rpxbZNTCx38A"
+                'Authorization': LoginSerivce.getAuthToken()
             },
             dataType: 'json',
             method: 'GET'
@@ -63,7 +64,7 @@ class ApiService {
         return $.ajax({
             url: BASE_URL + "/album/" + albumId + "/photo",
             headers: {
-                'Authorization': "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJidmVzZWwiLCJleHAiOjE1NzcwNTg3Njd9.-ZjQuiF3nzGIrnS2Nr_f5MbE-6BF_7YUwrUHKPDYQ8OxvkTGYJUd8u83xtZj2E113VWAxR7l_8rpxbZNTCx38A",
+                'Authorization': LoginSerivce.getAuthToken(),
                 "Accept": "application/json"
             },
             cache: false,
