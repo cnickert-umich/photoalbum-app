@@ -53,7 +53,7 @@
         <!-- Register -->
         <p>
           Already have an account?
-          <router-link to="/login">Login</router-link>
+          <router-link to="/manage/login">Login</router-link>
         </p>
       </form>
     </div>
@@ -94,7 +94,7 @@ export default {
         registerPromise
           .then(() => {
             this.$router.push({
-              path: "/login",
+              path: "/manage/login",
               query: { success: true, username: this.username }
             });
           })

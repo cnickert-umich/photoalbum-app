@@ -15,10 +15,10 @@
                 <strong>Mange your photos through our portal. Upload, store, and view from anywhere.</strong>
               </p>
 
-              <router-link to="/signup">
+              <router-link to="/manage/signup">
                 <button type="button" class="btn btn-outline-light">Signup</button>
               </router-link>
-              <router-link to="/login">
+              <router-link to="/manage/login">
                 <button type="button" class="btn btn-info">Login</button>
               </router-link>
               <p>Are you new? Signup for free!</p>

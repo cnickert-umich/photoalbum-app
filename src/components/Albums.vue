@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-xs-6 col-md-4 col-lg-3 d-flex align-items-stretch" v-for="album in albums" v-bind:key="album.albumId">
-      <router-link :to="'/album/' + album.albumId + '/photos'" class="btn w-100">
+      <router-link :to="'/manage/album/' + album.albumId + '/photos'" class="btn w-100">
         <h4>{{album.name}}</h4>
         <p>ID: #{{album.albumId}}</p>
       </router-link>

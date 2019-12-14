@@ -45,6 +45,19 @@ class ApiService {
         });
     }
 
+    getAlbumById(albumId) {
+        return $.ajax({
+            url: BASE_URL + "/album/" + albumId,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            dataType: 'json',
+            method: 'GET'
+
+        });
+    }
+
     getPhotos(albumId) {
         return $.ajax({
             url: BASE_URL + "/album/" + albumId + "/photo",

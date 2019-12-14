@@ -1,10 +1,14 @@
 <template>
   <!--Navbar-->
-  <nav id="nav" class="navbar navbar-expand-lg navbar-dark info-color sticky-top scrolling-navbar">
+  <nav
+    id="nav"
+    v-if="$route.path!='/'"
+    class="navbar navbar-expand-lg navbar-dark info-color sticky-top scrolling-navbar"
+  >
     <div class="container">
       <!-- Navbar brand -->
 
-      <router-link to="/" class="navbar-brand text-center mr-5 nav-item">
+      <router-link to="/manage" class="navbar-brand text-center mr-5 nav-item">
         <span>Photortal</span>
         <i class="fas fa-camera-retro fa-lg pl-2"></i>
       </router-link>
@@ -47,15 +51,15 @@
 
           <div class="dropdown-menu dropdown-info" aria-labelledby="navbarDropdownMenuLink">
             <h6 class="dropdown-header">Album</h6>
-            <router-link to="/albums" class="dropdown-item">
+            <router-link to="/manage/albums" class="dropdown-item">
               <i class="fas fa-folder-open pr-2"></i>View All
             </router-link>
-            <router-link to="/albums/new" class="dropdown-item">
+            <router-link to="/manage/albums/new" class="dropdown-item">
               <i class="fas fa-folder-plus pr-2"></i>New
             </router-link>
 
             <h6 class="dropdown-header">Photos</h6>
-            <router-link to="/upload" class="dropdown-item">
+            <router-link to="/manage/upload" class="dropdown-item">
               <i class="fas fa-cloud-upload-alt pr-2"></i>Upload
             </router-link>
           </div>
@@ -82,10 +86,10 @@
           </div>
         </div>
         <div v-else>
-          <router-link to="/signup">
+          <router-link to="/manage/signup">
             <button type="button" class="btn btn-outline-light">Signup</button>
           </router-link>
-          <router-link to="/login">
+          <router-link to="/manage/login">
             <button type="button" class="btn btn-info">Login</button>
           </router-link>
         </div>
@@ -116,7 +120,7 @@ export default {
   methods: {
     logout: function() {
       LoginService.stashAuthToken(null);
-      this.$router.push("/login");
+      this.$router.push("/manage/login");
     },
     checkAuthentication: function() {
       let authToken = LoginService.getAuthToken();
@@ -126,14 +130,19 @@ export default {
         this.userename = claims.sub;
         this.authenticated = true;
         let path = this.$route.path;
-        if (path == "/login" || path == "/signup") {
-          this.$router.push("/");
+        if (path == "/manage/login" || path == "/manage/signup") {
+          this.$router.push("/manage");
         }
       } else {
         this.authenticated = false;
         let path = this.$route.path;
-        if (path != "/login" && path != "/signup" && path != "/") {
-          this.$router.push("/login");
+        if (
+          path != "/manage/login" &&
+          path != "/manage/signup" &&
+          path != "/manage" &&
+          path != "/"
+        ) {
+          this.$router.push("/manage/login");
         }
       }
     }

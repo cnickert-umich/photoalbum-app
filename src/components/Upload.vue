@@ -95,7 +95,7 @@ export default {
       }
 
       Promise.all(imagePromises).then(() => {
-        this.$router.push("/album/" + this.selectedAlbumId + "/photos");
+        this.$router.push("/manage/album/" + this.selectedAlbumId + "/photos");
         this.$router.go(this.$router.currentRoute);
       });
     }

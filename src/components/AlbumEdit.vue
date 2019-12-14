@@ -36,7 +36,7 @@ export default {
     createAlbum: function() {
       let albumsPromise = ApiService.createAlbum(this.albumName);
       albumsPromise.done(data => {
-        this.$router.push("/album/" + data.albumId + "/photos");
+        this.$router.push("/manage/album/" + data.albumId + "/photos");
         this.$router.go(this.$router.currentRoute);
       });
     }

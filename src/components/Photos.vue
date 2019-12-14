@@ -1,13 +1,15 @@
 <template>
-  <div class="row">
-    <div class="col-xs-6 col-md-4 col-lg-3 mb-2" v-for="photoId in photos" v-bind:key="photoId">
-      <a v-bind:href="generatePhotoUrl(photoId)" target="_blank">
-        <img
-          v-bind:src="generatePhotoUrl(photoId)"
-          class="img-fluid img-thumbnail"
-          alt="loading photo"
-        />
-      </a>
+  <div>
+    <div class="row">
+      <div class="col-xs-6 col-md-4 col-lg-3 mb-2" v-for="photoId in photos" v-bind:key="photoId">
+        <a v-bind:href="generatePhotoUrl(photoId)" target="_blank">
+          <img
+            v-bind:src="generatePhotoUrl(photoId)"
+            class="img-fluid img-thumbnail"
+            alt="loading photo"
+          />
+        </a>
+      </div>
     </div>
   </div>
 </template>

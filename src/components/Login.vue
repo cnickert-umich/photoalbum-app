@@ -46,7 +46,7 @@
         <!-- Register -->
         <p>
           Not a member?
-          <router-link to="/signup">Register</router-link>
+          <router-link to="/manage/signup">Register</router-link>
         </p>
       </form>
     </div>
@@ -90,7 +90,7 @@ export default {
 
           LoginService.stashAuthToken(authToken);
 
-          this.$router.push("/albums");
+          this.$router.push("/manage/albums");
         })
         .catch(() => {
           this.disableClick = false;

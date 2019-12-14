@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import ManageHome from '../views/ManageHome.vue'
 import AlbumDetails from '../views/AlbumDetails.vue'
 import Login from '../components/Login.vue'
 import Signup from '../components/Signup.vue'
+import ClientView from '../views/ClientView.vue'
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import '../../node_modules/mdbootstrap/css/bootstrap.css';
@@ -18,36 +19,41 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: 'client',
+    component: ClientView
   },
   {
-    path: '/login',
+    path: '/manage',
+    name: 'manage',
+    component: ManageHome
+  },
+  {
+    path: '/manage/login',
     name: 'login',
     component: Login
   },
   {
-    path: '/signup',
+    path: '/manage/signup',
     name: 'signup',
     component: Signup
   },
   {
-    path: '/albums',
+    path: '/manage/albums',
     name: 'albums',
     component: () => import('../views/AlbumsView.vue')
   },
   {
-    path: '/albums/new',
+    path: '/manage/albums/new',
     name: 'albums_new',
     component: () => import('../components/AlbumEdit.vue')
   },
   {
-    path: '/upload',
+    path: '/manage/upload',
     name: 'upload',
     component: () => import('../views/UploadView.vue')
   },
   {
-    path: '/album/:id/photos',
+    path: '/manage/album/:id/photos',
     name: 'album_details',
     component: AlbumDetails
   }
