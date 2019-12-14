@@ -1,0 +1,7 @@
+{
+    "name": "photoalbum-app",
+    "short_name": "photoalbum-app",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "theme_color": "#FFFFFF"
+  }
